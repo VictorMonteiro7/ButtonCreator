@@ -40,7 +40,22 @@ function handleChange(event){
   let value = event.target.value;
   handleStyle[name](value);
   showCss();
+  saveValues(name, value)
 }
+
+function saveValues(name,value){
+  localStorage[name] = value;
+}
+
+function setValues(){
+  const properties = Object.keys(localStorage);
+  properties.forEach(propertie=>{
+    controles.elements[propertie].value = localStorage[propertie];
+    handleStyle[propertie](localStorage[propertie]);
+    showCss();    
+  })
+}
+setValues();
 
 function showCss(){
  cssText.innerHTML = '<span>' + btn.style.cssText.split('; ').join('</span><span>');;  
